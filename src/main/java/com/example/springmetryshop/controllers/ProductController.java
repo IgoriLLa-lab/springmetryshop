@@ -19,7 +19,7 @@ public class ProductController {
 
     @GetMapping("/")
     public String products(@RequestParam(name = "title", required = false) String title,
-                          Principal principal, Model model) {
+                           Principal principal, Model model) {
         model.addAttribute("products", productService.listProducts(title));
         model.addAttribute("user", productService.getUserByPrincipal(principal));
         return "products";
