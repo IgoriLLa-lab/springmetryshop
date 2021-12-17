@@ -11,7 +11,7 @@ technologies:
 -security
 -freemarker
 -data jpa + postgresql version (4.30 (datasource.url=jdbc:postgresql://localhost:5432/metryshopDB))
- additionally:
+additionally:
 -lombok
 
 Entities:

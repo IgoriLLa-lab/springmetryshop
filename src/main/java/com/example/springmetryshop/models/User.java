@@ -1,7 +1,7 @@
 package com.example.springmetryshop.models;
 
 import com.example.springmetryshop.enums.Role;
-import lombok.Data;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,19 +9,22 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
+@Data
 @Entity
 @Table(name = "users")
-@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
     @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "numberPhone", unique = true)
+    @Column(name = "numberPhone")
     private String numberPhone;
 
     @Column(name = "name")
@@ -78,4 +81,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return active;
     }
+
 }

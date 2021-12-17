@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
@@ -18,18 +17,18 @@ public class ProductService {
     private final UserRepository userRepository;
 
     public List<Product> listProducts(String title) {
-        if (title != null) return productRepository.findByTitle(title.toLowerCase(Locale.ROOT));
+        if (title != null) return productRepository.findByTitle(title);
         return productRepository.findAll();
-    }
-
-    public void saveProduct(Principal principal, Product product) {
-        product.setUser(getUserByPrincipal(principal));
-        productRepository.save(product);
     }
 
     public User getUserByPrincipal(Principal principal) {
         if (principal == null) return new User();
         return userRepository.findByEmail(principal.getName());
+    }
+
+    public void saveProduct(Principal principal, Product product) {
+        product.setUser(getUserByPrincipal(principal));
+        productRepository.save(product);
     }
 
     public void deleteProduct(Long id) {
@@ -39,4 +38,5 @@ public class ProductService {
     public Product getProductById(Long id) {
         return productRepository.findById(id).orElse(null);
     }
+
 }
